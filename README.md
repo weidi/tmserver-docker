@@ -5,6 +5,10 @@ You can find it on Docker Hub [lduriez/tmserver](https://hub.docker.com/r/ldurie
 
 Only lan dedicated is enable (internet dedicated will be added in future version)
 
+## Howto start
+
+```docker run --rm -it -p 2350:2350/tcp -p 2350:2350/udp -p 3450:3450/tcp -p 5000:5000 toprock/tmserver```
+
 ## Exposed ports :
 * 2350/tcp game server port
 * 2350/udp game server port
