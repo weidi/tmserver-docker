@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  tmserver:
+    image: toprock/tmserver
+    restart: always
+    ports:
+      - 2350:2350/udp
+      - 2350:2350
+      - 3450:3450
+      - 5000:5000
+    volumes:
+      - "./Tracks:/opt/tmserver/GameData/Tracks"

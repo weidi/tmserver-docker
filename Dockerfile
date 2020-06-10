@@ -1,20 +1,17 @@
-FROM debian:stretch-slim
+FROM alpine:latest
 
 RUN mkdir /opt/tmserver
 
 WORKDIR /opt/tmserver
 
 COPY TrackmaniaServer_2011-02-21.zip /opt/tmserver
-RUN apt-get update && apt-get install -y unzip
-RUN unzip /opt/tmserver/TrackmaniaServer_2011-02-21.zip -d /opt/tmserver
+RUN apk update &&\
+    apk add unzip &&\
+	unzip TrackmaniaServer_2011-02-21.zip -d /opt/tmserver &&\
+    rm TrackmaniaServer_2011-02-21.zip &&\
+	rm TrackmaniaServer.exe
 COPY custom_game_settings.txt /opt/tmserver/GameData/Tracks/MatchSettings/
 COPY RunTrackmaniaServer.sh /opt/tmserver/
-
-RUN apt-get -y install apache2 php php-zip php-xml
-COPY AdminServ_v2.1.1.zip /var/www/html
-RUN unzip /var/www/html/AdminServ_v2.1.1.zip -d /var/www/html
-RUN chmod -R 777 /var/www/html/
-RUN rm -f /var/www/html/index.html
 
 ARG SERVER_NAME='Trackmania Server'
 ARG SERVER_DESC='This is a Trackmania Server'
